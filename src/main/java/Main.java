@@ -38,7 +38,7 @@ public class Main extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("D:\\Pictures\\skull 2.png")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon("./src/main/java/Files/skull 2.png")); // NOI18N
         jLabel1.setText("jLabel1");
 
         jButton1.setText("Carregar Arquivo");
