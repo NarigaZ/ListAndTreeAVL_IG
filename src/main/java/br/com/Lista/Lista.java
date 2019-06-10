@@ -151,4 +151,4 @@ public class Lista {
     public String imprimeTamanho(){
         return "Tamanho da Lista: "+this.tamanhoLista;
     }
-}// fim da classe List
+}// fim da classe Lis

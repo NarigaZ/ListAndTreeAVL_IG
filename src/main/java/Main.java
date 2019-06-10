@@ -294,7 +294,6 @@ public class Main extends javax.swing.JFrame {
             }
             t.displayTree();
         }
-
     }
 
     // Variables declaration - do not modify
