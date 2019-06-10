@@ -104,9 +104,9 @@ public class AvlTree {
     protected AvlNode search(AvlNode p, String el) {
         while (p != null) {
             /* se valor procuradp == chave do nó retorna referência ao nó */
-            if (el==p.name) return p;
+            if (el.equalsIgnoreCase(p.name)) return p;
                 /* se valor procurado < chave do nó, procurar na sub-árvore esquerda deste nó */
-            else if (el.compareToIgnoreCase(p.name) < 0) p = p.left;
+            else if (el.compareToIgnoreCase(p.name) > 0) p = p.left;
                 /* se valor procurado > chave do nó, procurar na sub-árvore direita deste nó */
             else p = p.right;
         }
@@ -155,7 +155,6 @@ public class AvlTree {
         if (p!=null && p.name==el) return prev;
         return null;
     }
-    /* método de autoria de Leonardo Zandoná - 2006/2 */
     public void displayTree() {
         if (isEmpty()){
             System.out.println("Árvore vazia!");
@@ -201,7 +200,6 @@ public class AvlTree {
         //frame.pack();
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
     }
     
     Graph<Integer, String> graph = new DelegateForest<>();

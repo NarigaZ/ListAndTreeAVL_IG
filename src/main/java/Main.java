@@ -4,11 +4,18 @@
  * and open the template in the editor.
  */
 
+import br.com.AVL.AvlNode;
 import br.com.AVL.AvlTree;
 import br.com.FileManager.FileManager;
 import br.com.Lista.Lista;
+import br.com.Lista.EmptyListException;
+import br.com.Lista.NoLista;
 
 import javax.swing.*;
+import java.awt.*;
+import java.io.IOException;
+import java.sql.SQLOutput;
+import java.util.Scanner;
 
 /**
  *
@@ -103,10 +110,8 @@ public class Main extends javax.swing.JFrame {
                 t.insert(linha);
             }
         }
-        list.print();
-        t.displayTree();
-        t.inorder();
         FileManager.ArqClose();
+        menu();
     }
 
     public static void main(String[] args) {
@@ -133,15 +138,163 @@ public class Main extends javax.swing.JFrame {
         }
         //</editor-fold>
 
+        Lista list = new Lista("Professores");
+        AvlTree t = new AvlTree();
+
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 Main tela = new Main();
                 tela.setLocationRelativeTo(null);
                 tela.setVisible(true);
-
             }
         });
+
+
+    }
+
+    public void menu (){
+        Scanner in = new Scanner(System.in);
+        int op2,pos;
+        String nm;
+        System.out.println("Deseja Continuar ?");
+        String nada = in.next();
+        for(int i=0 ; i<30 ; i++){
+            System.out.println();
+        }
+        int op = -1;
+        while (op<1 || op>2) {
+            System.out.println("Escolha sua Opcao : ");
+            System.out.println("1 - Lista");
+            System.out.println("2 - Arvore AVL");
+            op = in.nextInt();
+        }
+        if (op==1){
+            op=-1;
+            while(op!=0){
+                System.out.println("------- Lista -------");
+                System.out.println("1 - Inserir Elemento");
+                System.out.println("2 - Remover Elemento");
+                System.out.println("3 - Buscar Elemento");
+                System.out.println("4 - Tamanho da lista");
+                System.out.println("5 - Imprimir Lista");
+                System.out.println("0 - Sair de Lista");
+                op = in.nextInt();
+                switch (op) {
+                    case 1 :
+                        System.out.println("1 - Inserir no inicio");
+                        System.out.println("2 - Inserir no Fim");
+                        System.out.println("3 - Inserir em posicao");
+                        op2 = in.nextInt();
+                        if (op2 == 1){
+                            System.out.print("Entre com o nome: ");
+                            list.insereNoInicio(in.nextLine());
+                        }else if (op2 == 2){
+                            System.out.print("Entre com o nome: ");
+                            list.insereNoFim(in.nextLine());
+                        }else if (op2 == 3){
+                            System.out.print("Entre com o nome: ");
+                            nm = in.nextLine();
+                            System.out.print("Entre com a posicao: ");
+                            pos = in.nextInt();
+                            list.insertAtPosicao(pos,nm);
+                        }
+                        break;
+                    case 2 :
+                        System.out.println("1 - Remover no inicio");
+                        System.out.println("2 - Remover no Fim");
+                        System.out.println("3 - Remover em posicao");
+                        op2 = in.nextInt();
+                        if (op2 == 1){
+                            try{
+                                nm = list.removeNoInicio();
+                                System.out.printf(nm," Removido\n");
+                            }catch (EmptyListException e){
+                            }
+                        }else if (op2 == 2){
+                            try{
+                                nm = list.removeNoFim();
+                                System.out.printf(nm," Removido\n");
+                            }catch (EmptyListException e){
+                            }
+                        }else if (op2 == 3){
+                            System.out.print("Entre com a posicao: ");
+                            pos = in.nextInt();
+                            try {
+                                if (list.removeFromPosicao(pos)){
+                                    System.out.println("Elemento Removido");
+                                }else {
+                                    System.out.println("Erro ao Remover");
+                                }
+                            }catch (EmptyListException e){
+
+                            }
+                        }
+                        break;
+                    case 3:
+                        System.out.print("Entre com o nome: ");
+                        list.buscaElemento(in.nextLine());
+                        break;
+                    case 4:
+                        System.out.println(list.imprimeTamanho());
+                        break;
+                    case 5:
+                        list.print();
+                }
+            }
+        }else{
+            op=-1;
+            while(op!=0){
+                System.out.println("------- Arvore AVL -------");
+                System.out.println("1 - Inserir Elemento");
+                System.out.println("2 - Remover Elemento");
+                System.out.println("3 - Buscar Elemento");
+                System.out.println("4 - Imprimir Arvore");
+                System.out.println("0 - Sair");
+                op = in.nextInt();
+                switch (op){
+                    case 1:
+                        System.out.print("Entre com o nome: ");
+                        nm = in.nextLine();
+                        t.insert(nm);
+                        break;
+                    case 2:
+                        System.out.println("Error :X :X :X :X");
+                        break;
+                    case 3:
+                        System.out.print("Entre com o nome: ");
+                        nm = in.next();
+                        AvlNode el = new AvlNode();
+                        el = t.search(nm);
+                        if(el != null){
+                            System.out.println("Nome Pertecente a Arvore");
+                        }else{
+                            System.out.println("Nome náo encontrado");
+                        }
+                        break;
+                    case 4:
+                        System.out.println("------- Imprimir -------");
+                        System.out.println("1 - Sair e Mostrar Arvore AVL");
+                        System.out.println("2 - In Order");
+                        System.out.println("3 - Pre Order");
+                        op2 = in.nextInt();
+                        if (op2==1){
+
+                        }else if (op2==2){
+                            t.inorder();
+                            System.out.println();
+                        }else if (op2==3){
+                            t.preorder();
+                            System.out.println();
+                        }else{
+                            System.out.println("Error :X :X :X :X");
+                        }
+                        break;
+                }
+            }
+            t.displayTree();
+        }
+
     }
 
     // Variables declaration - do not modify
@@ -149,7 +302,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    Lista list = new Lista("Professores");
-    AvlTree t = new AvlTree();
+    static Lista list = new Lista("Professores");
+    static AvlTree t = new AvlTree();
     // End of variables declaration
 }

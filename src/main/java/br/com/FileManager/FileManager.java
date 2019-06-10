@@ -24,6 +24,7 @@ public class FileManager {
             if (retorno == JFileChooser.APPROVE_OPTION) {
                 File file = fileChooser.getSelectedFile();
                 nome = file.getPath();
+                cl.setVisible(false);
             }else{
                 System.exit(0);
             }

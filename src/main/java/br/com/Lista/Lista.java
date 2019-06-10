@@ -45,17 +45,16 @@ public class Lista {
 
 
     //Insere na posição informada
-	/*public void insertAtPosicao(int posicao, Object elemento) {
+	public void insertAtPosicao(int posicao, String elemento) {
 
-
-	}*/
+	}
 
     // remove o primeiro nó de List
-    public Object removeNoInicio() throws EmptyListException {
+    public String removeNoInicio() throws EmptyListException {
         if (estaVazia()) {
             throw new EmptyListException(nome);
         }
-        Object removedItem = primeiroNo.name; // recupera dados sendo removidos
+        String removedItem = primeiroNo.name; // recupera dados sendo removidos
         // atualiza referências primeiroNo e ultimoNo
         if (primeiroNo == ultimoNo) {
             primeiroNo = ultimoNo = null;
@@ -66,7 +65,7 @@ public class Lista {
         return removedItem;// retorna dados de nó removidas
     }// fim do método removeNoFim
 
-    public Object removeNoFim() throws EmptyListException{
+    public String removeNoFim() throws EmptyListException{
         if (estaVazia()){
             throw new EmptyListException(nome); //lança excessão se List estiver vazia
         }
@@ -96,16 +95,32 @@ public class Lista {
     }//fim do método removeNoFim
 
 
-	/*public Object removeFromPosicao(int posicao) throws EmptyListException {
+	public boolean removeFromPosicao(int posicao) throws EmptyListException {
+        if (estaVazia()){
+            throw new EmptyListException(nome); //lança excessão se List estiver vazia
+        }
+        if (posicao>tamanhoLista || posicao<1){
+            return false;
+        }else {
+            return true;
+        }
+	}
 
 
-		return null;
-	}*/
-
-
-	/*public boolean buscaElemento(Object elemento) {
-
-	}*/
+	public boolean buscaElemento(String elemento) {
+	    if(estaVazia()){
+	        return false;
+        }else{
+	        NoLista buscanome = primeiroNo;
+	        while(buscanome != null){
+	            if (elemento.equalsIgnoreCase(buscanome.name)){
+	                return true;
+                }
+	            buscanome = buscanome.proximoNo;
+            }
+	        return false;
+        }
+	}
 
 
     // Determina se a lista estiver vazia

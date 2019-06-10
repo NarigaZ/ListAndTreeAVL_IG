@@ -18,4 +18,6 @@ public class AvlNode {
         ++globalID;
         
     }
+    public AvlNode (){
+    }
 }
